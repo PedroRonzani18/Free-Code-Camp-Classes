@@ -1,9 +1,20 @@
 #pragma once
 
-#include "Node.h"
+/* CPP implementation of Linked List with templates */
+
 #include <stdio.h>
 #include <stdlib.h>
 
+template <typename T>
+struct Node
+{
+    T data;
+    Node<T>* next;
+    Node(T data):
+        data(data),
+        next(NULL)
+    {}
+};
 
 template <typename T>
 struct LinkedList
