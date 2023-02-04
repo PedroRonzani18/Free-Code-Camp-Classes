@@ -9,13 +9,14 @@
                 "-g",
                 "${file}",
                 "-o",
+                "*.cpp",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
                 "cwd": "${fileDirname}"
             },
             "problemMatcher": [
-                "$gcc"
+                "$g++"
             ],
             "group": {
                 "kind": "build",

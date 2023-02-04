@@ -7,6 +7,12 @@
         "unordered_map": "c",
         "unordered_set": "c",
         "vector": "c",
-        "ostream": "c"
+        "ostream": "c",
+        "stdlib.h": "c",
+        "array": "cpp",
+        "string_view": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "source_location": "cpp"
     }
 }

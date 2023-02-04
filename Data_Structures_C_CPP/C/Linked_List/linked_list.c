@@ -6,7 +6,14 @@ typedef struct Node {
     struct Node* next;
 }Node;
 
-Node* global_head;
+Node* create_node(int value)
+{
+    Node* retorno = (Node*)malloc(sizeof(Node));
+    retorno->data = value;
+    retorno->next = NULL;
+    return retorno;
+}
+
 
 void print(Node* current)
 {
@@ -36,14 +43,17 @@ void reverse_print_recursive(Node* current)
 }
 
 
-
-Node* create_node(int value)
+Node* find_node_by_value(Node* head, int value)
 {
-    Node* retorno = (Node*)malloc(sizeof(Node));
-    retorno->data = value;
-    retorno->next = NULL;
-    return retorno;
+    Node* aux = head;
+    while(aux != NULL)
+    {
+        if(aux->data == value) return aux;
+        aux = aux->next;
+    }
+    return NULL;
 }
+
 
 void insert_before_head(int value, Node** head)
 {
@@ -56,17 +66,6 @@ void insert_after_node(Node* node_to_insert_after, Node* new_node)
 {
     new_node->next = node_to_insert_after->next;
     node_to_insert_after->next = new_node;
-}
-
-Node* find_node_by_value(Node* head, int value)
-{
-    Node* aux = head;
-    while(aux != NULL)
-    {
-        if(aux->data == value) return aux;
-        aux = aux->next;
-    }
-    return NULL;
 }
 
 void insert_value_in_index(int data, int pos, Node** head)
@@ -97,6 +96,7 @@ void insert_value_in_index(int data, int pos, Node** head)
     temp2->next = temp1;
 }
 
+
 void delete_node_at_index(int pos, Node** head)
 {
     Node* temp1 = *head;
@@ -115,6 +115,7 @@ void delete_node_at_index(int pos, Node** head)
     free(temp2);
 }
 
+
 void reverse_iterate(Node** head)
 {
     Node *prev, *current, *next;
@@ -131,22 +132,7 @@ void reverse_iterate(Node** head)
     *head = prev;
 }
 
-void reverse_recursive(Node** head, Node** current)
-{
-    if((*current)->next == NULL)
-    {
-        head = current;
-        return;
-    }
-    reverse_recursive(head,&(*current)->next);
-
-    Node* new_previous = (*current)->next;
-    new_previous->next = *current;
-    (*current)->next = NULL;
-}
-
-
-void reverse_new(Node** head_ref) {
+void reverse_recursive(Node** head_ref) {
     Node* first, *rest;
 
     if (*head_ref == NULL) return; // confere se está vazia
@@ -158,7 +144,7 @@ void reverse_new(Node** head_ref) {
                               // means there is only one node in the list
                               // chegou no ultimo node
 
-    reverse_new(&rest); // If there are more than one node in the list, the function calls itself recursively with the rest of the list as the input
+    reverse_recursive(&rest); // If there are more than one node in the list, the function calls itself recursively with the rest of the list as the input
                         // This recursive call will reverse the rest of the list, making the last node the new head.
 
     first->next->next = first; // adjusts the pointers between the first and the rest of the list
@@ -183,7 +169,6 @@ void reverse_new(Node** head_ref) {
 int main()
 {
     Node* head = NULL;
-    global_head = NULL;
     Node* temp;
 
     for(int i=0; i<5; i++)
@@ -192,7 +177,7 @@ int main()
     }
 
     print(head);
-    reverse_new(&head);
+    reverse_recursive(&head);
     print(head);
 
 }
