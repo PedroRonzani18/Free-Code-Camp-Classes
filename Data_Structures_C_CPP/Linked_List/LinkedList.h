@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stack>
 
 template <typename T>
 struct Node
@@ -149,5 +150,31 @@ struct LinkedList
         head = prev;
 
         return head;
+    }
+
+    void reverse_stack()
+    {
+        if(head == nullptr) return;
+
+        std::stack<Node<T>*> s;
+
+        Node<T>* temp1 = head;
+
+        while(temp1 != nullptr)
+        {
+            s.push(temp1);
+            temp1 = temp1->next;
+        }
+
+        temp1 = s.top();
+        head = temp1;
+        s.pop;
+
+        while(!s.empty()){
+            temp1.next = s.top();
+            s.pop();
+            temp1 = temp2.next;
+        }
+        temp1->next = nullptr;
     }
 };
