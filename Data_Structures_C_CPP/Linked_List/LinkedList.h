@@ -168,7 +168,7 @@ struct LinkedList
 
         temp1 = s.top();
         head = temp1;
-        s.pop;
+        s.pop();
 
         while(!s.empty()){
             temp1.next = s.top();

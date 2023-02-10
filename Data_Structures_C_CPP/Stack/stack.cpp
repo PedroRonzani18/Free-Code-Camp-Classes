@@ -247,7 +247,7 @@ std::string infix_to_postfix(std::string str)
 
 using namespace std;
 
-string infix_to_postfix(string infix)
+string convert(string infix)
 {
     string postfix = "";
     stack <char> s;
